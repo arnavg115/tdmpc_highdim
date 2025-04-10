@@ -10,7 +10,7 @@ class Snake(BaseAgent):
     urdf_path = f"./robot_arm.urdf"
 
     arm_joint_names = [
-        f"joint{i+1}" for i in range(20)
+        f"joint{i+1}" for i in range(10+1)
     ]
 
     arm_stiffness = 1e3
