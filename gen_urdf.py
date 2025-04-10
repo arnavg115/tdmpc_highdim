@@ -23,8 +23,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     if num_links < 1:
         print("Error: Number of links must be at least 1")
         return
-    
-    # Colors for links
     colors = [
         {"name": "blue", "rgba": "0.0 0.0 0.8 1.0"},
         {"name": "red", "rgba": "0.8 0.0 0.0 1.0"},
@@ -36,7 +34,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
         {"name": "grey", "rgba": "0.5 0.5 0.5 1.0"}
     ]
     
-    # Start the URDF file
     urdf = f"""<?xml version="1.0"?>
 <robot name="{num_links}_dof_arm">
     <!-- Materials -->
@@ -100,7 +97,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
             axis = "1 0 0"  # x-axis (roll)
             joint_limits = "-1.57 1.57"  # 90 degrees in each direction
             
-        # Calculate inertia based on shape
         inertia_xx = current_mass * 0.005
         inertia_yy = current_mass * 0.005
         inertia_zz = current_mass * 0.005
@@ -120,7 +116,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     </joint>
 """
         
-        # Link
         if shape == "box":
             geometry = f"""<box size="{link_radius*2} {link_radius*1.5} {link_length}"/>"""
             origin = f"""<origin xyz="0 0 {link_length/2}" rpy="0 0 0"/>"""
@@ -184,7 +179,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
 </robot>
 """
     
-    # Write to file
     with open(file_name, 'w') as f:
         f.write(urdf)
     
