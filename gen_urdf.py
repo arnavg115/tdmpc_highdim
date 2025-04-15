@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 
 def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2, 
                  link_radius=0.05, mass_base=1.0, mass_reduction_factor=0.1,
@@ -86,16 +87,22 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
         shape = "box" if i % 2 == 1 else "cylinder"
         
         # Adjust joint axis to create different movement patterns
-        axis_pattern = i % 3
-        if axis_pattern == 0:
+        # axis_pattern = i % 3
+        if i == 1:
             axis = "0 0 1"  # z-axis (yaw)
             joint_limits = "-3.14 3.14"  # Full rotation
-        elif axis_pattern == 1:
-            axis = "0 1 0"  # y-axis (pitch)
-            joint_limits = "-1.57 1.57"  # 90 degrees in each direction
         else:
-            axis = "1 0 0"  # x-axis (roll)
-            joint_limits = "-1.57 1.57"  # 90 degrees in each direction
+            axis = "0 1 0"  # y-axis (pitch)
+            joint_limits = "-1.57 1.57"
+        # if axis_pattern == 0:
+        #     axis = "0 0 1"  # z-axis (yaw)
+        #     joint_limits = "-3.14 3.14"  # Full rotation
+        # elif axis_pattern == 1:
+        #     axis = "0 1 0"  # y-axis (pitch)
+        #     joint_limits = "-1.57 1.57"  # 90 degrees in each direction
+        # else:
+        #     axis = "1 0 0"  # x-axis (roll)
+        #     joint_limits = "-1.57 1.57"  # 90 degrees in each direction
             
         inertia_xx = current_mass * 0.005
         inertia_yy = current_mass * 0.005
@@ -178,8 +185,10 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     </link>
 </robot>
 """
-    
-    with open(file_name, 'w') as f:
+    if "urdf" not in os.listdir():
+        os.mkdir("urdf")
+
+    with open("urdf/"+file_name, 'w') as f:
         f.write(urdf)
     
     print(f"Successfully generated URDF file '{file_name}' with {num_links} links and {num_links + 1} DOF")
@@ -188,13 +197,13 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate a URDF file for a robot arm with n links')
-    parser.add_argument('num_links', type=int, help='Number of links for the robot arm')
-    parser.add_argument('--output', '-o', default='robot_arm.urdf', help='Output file name')
+    parser.add_argument('num_links', type=int, help='Number of max links for the robot arm')
+    parser.add_argument('--output', '-o', default='robot_arm', help='Output file name')
     parser.add_argument('--length', '-l', type=float, default=0.2, help='Length of each link (meters)')
     parser.add_argument('--radius', '-r', type=float, default=0.05, help='Radius of each link (meters)')
     parser.add_argument('--base-mass', '-m', type=float, default=1.0, help='Mass of the base link (kg)')
     parser.add_argument('--plain', action='store_false', dest='colorful', help='Use only grey color for links')
     
     args = parser.parse_args()
-    
-    generate_urdf(args.num_links, args.output, args.length, args.radius, args.base_mass, colorful=args.colorful)
+    for i in range(10, args.num_links, 10):
+        generate_urdf(i, f"{args.output}_{i}.urdf", args.length, args.radius, args.base_mass, colorful=args.colorful)

@@ -6,6 +6,8 @@ from mani_skill.agents.registration import register_agent
 
 @register_agent()
 class Snake(BaseAgent):
+
+    joints = 0
     uid = "snake"
     urdf_path = f"./robot_arm.urdf"
 
@@ -33,9 +35,23 @@ class Snake(BaseAgent):
             normalize_action=False,
         )
 
+        arm_pd_joint_delta_pos = PDJointPosControllerConfig(
+            self.arm_joint_names,
+            lower=-0.1,
+            upper=0.1,
+            stiffness=self.arm_stiffness,
+            damping=self.arm_damping,
+            force_limit=self.arm_force_limit,
+            use_delta=True,
+        )
+
+
         controller_configs = {
             "pd_joint_pos" :{
                 "arm": arm_pd_joint_pos
+            },
+            "pd_joint_delta_pos" :{
+                "arm": arm_pd_joint_delta_pos
             }
         }
 
