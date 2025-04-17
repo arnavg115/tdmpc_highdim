@@ -7,12 +7,12 @@ from mani_skill.agents.registration import register_agent
 @register_agent()
 class Snake(BaseAgent):
 
-    joints = 0
+    joints = 10
     uid = "snake"
-    urdf_path = f"./robot_arm.urdf"
+    urdf_path = f"./urdf/robot_arm_{joints}.urdf"
 
     arm_joint_names = [
-        f"joint{i+1}" for i in range(10+1)
+        f"joint{i+1}" for i in range(joints+1)
     ]
 
     arm_stiffness = 1e3

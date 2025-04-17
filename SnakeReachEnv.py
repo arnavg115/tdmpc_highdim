@@ -15,7 +15,7 @@ from mani_skill.utils.building import actors
 from mani_skill.utils.structs.pose import Pose
 
 
-@register_env("SnakeReachEnv-v1", max_episode_steps=50)
+@register_env("SnakeReach-v1", max_episode_steps=50)
 class SnakeReachEnv(BaseEnv):
     SUPPORTED_REWARD_MODES = ["dense"]
     agent: Snake
