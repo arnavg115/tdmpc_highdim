@@ -6,7 +6,7 @@ import gymnasium as gym
 from PIL import Image
 import torch
 
-env = gym.make("SnakeReachEnv-v1",render_mode="rgb_array")
+env = gym.make("SnakeReach-v1",render_mode="rgb_array")
 obs,_  = env.reset()
 out = env.step(env.action_space.sample())
 
