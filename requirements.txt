@@ -1,0 +1,9 @@
+pandas
+termcolor
+hydra-core
+hydra-submitit-launcher
+wandb
+tensordict
+torchrl
+tensorboard
+tyro

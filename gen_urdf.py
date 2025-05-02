@@ -1,26 +1,9 @@
-#!/usr/bin/env python3
-
 import argparse
 import os
 
 def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2, 
                  link_radius=0.05, mass_base=1.0, mass_reduction_factor=0.1,
                  joint_effort=100, joint_velocity=1.0, colorful=True):
-    """
-    Generate a URDF file for a robot arm with a specified number of links.
-    
-    Args:
-        num_links (int): Number of links for the robot arm
-        file_name (str): Output file name
-        link_length (float): Length of each link
-        link_radius (float): Radius of each link
-        mass_base (float): Mass of the base link
-        mass_reduction_factor (float): Factor by which mass reduces for each subsequent link
-        joint_effort (float): Maximum effort for each joint
-        joint_velocity (float): Maximum velocity for each joint
-        colorful (bool): Whether to use different colors for links
-    """
-    
     if num_links < 1:
         print("Error: Number of links must be at least 1")
         return
@@ -40,7 +23,6 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     <!-- Materials -->
 """
     
-    # Add materials
     for color in colors:
         urdf += f"""    <material name="{color["name"]}">
         <color rgba="{color["rgba"]}"/>
@@ -71,38 +53,24 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     
     # Create links and joints
     for i in range(1, num_links + 1):
-        # Calculate current link properties
         current_mass = mass_base * (1.0 - (i-1) * mass_reduction_factor / num_links)
         if current_mass < 0.1:
             current_mass = 0.1
             
-        # Choose color
         if colorful:
             color_index = (i-1) % len(colors)
             color = colors[color_index]["name"]
         else:
             color = "grey"
         
-        # Choose shape based on position (alternating box and cylinder)
         shape = "box" if i % 2 == 1 else "cylinder"
         
-        # Adjust joint axis to create different movement patterns
-        # axis_pattern = i % 3
         if i == 1:
-            axis = "0 0 1"  # z-axis (yaw)
-            joint_limits = "-3.14 3.14"  # Full rotation
+            axis = "0 0 1"  # z-axis 
+            joint_limits = "-3.14 3.14"
         else:
-            axis = "0 1 0"  # y-axis (pitch)
+            axis = "0 1 0"  # y-axis 
             joint_limits = "-1.57 1.57"
-        # if axis_pattern == 0:
-        #     axis = "0 0 1"  # z-axis (yaw)
-        #     joint_limits = "-3.14 3.14"  # Full rotation
-        # elif axis_pattern == 1:
-        #     axis = "0 1 0"  # y-axis (pitch)
-        #     joint_limits = "-1.57 1.57"  # 90 degrees in each direction
-        # else:
-        #     axis = "1 0 0"  # x-axis (roll)
-        #     joint_limits = "-1.57 1.57"  # 90 degrees in each direction
             
         inertia_xx = current_mass * 0.005
         inertia_yy = current_mass * 0.005
@@ -185,10 +153,10 @@ def generate_urdf(num_links, file_name="robot_arm.urdf", link_length=0.2,
     </link>
 </robot>
 """
-    if "urdf" not in os.listdir():
+    if "urdf" not in os.listdir("Snake"):
         os.mkdir("urdf")
 
-    with open("urdf/"+file_name, 'w') as f:
+    with open("Snake/urdf/"+file_name, 'w') as f:
         f.write(urdf)
     
     print(f"Successfully generated URDF file '{file_name}' with {num_links} links and {num_links + 1} DOF")

@@ -20,7 +20,7 @@ from mani_skill.utils import gym_utils
 from mani_skill.utils.wrappers.flatten import FlattenActionSpaceWrapper
 from mani_skill.utils.wrappers.record import RecordEpisode
 from mani_skill.vector.wrappers.gymnasium import ManiSkillVectorEnv
-from SnakeReachEnv import SnakeReachEnv
+from Snake.SnakeReachEnv import SnakeReachEnv
 
 @dataclass
 class Args:

@@ -4,7 +4,7 @@ import numpy as np
 import sapien
 import torch
 
-from snake import Snake
+from .snake import Snake
 from mani_skill.envs.sapien_env import BaseEnv
 from mani_skill.sensors.camera import CameraConfig
 from mani_skill.utils import sapien_utils
@@ -31,13 +31,14 @@ class SnakeReachEnv(BaseEnv):
 
     @property
     def _default_human_render_camera_configs(self):
-        pose = sapien_utils.look_at([2.5, -2.5, 3], [0.0, 0.0, 0.2])
+        pose = sapien_utils.look_at([4, -4, 3], [0.0, 0.0, 0.2])
         return CameraConfig("render_camera", pose, 2048, 2048, 1, 0.01, 100)
 
     def _load_agent(self, options: dict):
         super()._load_agent(options, sapien.Pose())
 
     def _load_scene(self, options: dict):
+
         self.ground = build_ground(self.scene)
         self.ground.set_collision_group_bit(group=2, bit_idx=30, bit=1)
 
@@ -56,7 +57,9 @@ class SnakeReachEnv(BaseEnv):
         with torch.device(self.device):
 
             b = len(env_idx)
-            goal_xyz = torch.rand((b,3)) * 1.3
+            min_dist = 0.2 * self.agent.height
+            max_dist = 0.4 * self.agent.height
+            goal_xyz = torch.rand((b,3)) * (max_dist - min_dist) + min_dist
 
             
             self.goal_site.set_pose(Pose.create_from_pq(goal_xyz))

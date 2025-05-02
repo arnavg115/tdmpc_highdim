@@ -3,17 +3,20 @@ import numpy as np
 from mani_skill.agents.base_agent import BaseAgent, Keyframe
 from mani_skill.agents.controllers import *
 from mani_skill.agents.registration import register_agent
+from pathlib import Path
 
 @register_agent()
 class Snake(BaseAgent):
 
-    joints = 10
+    joints = 21
     uid = "snake"
-    urdf_path = f"./urdf/robot_arm_{joints}.urdf"
+    PACKAGE_DIR = Path(__file__).parent.resolve()
+    urdf_path = f"{PACKAGE_DIR}/urdf/robot_arm_{joints-1}.urdf"
 
     arm_joint_names = [
-        f"joint{i+1}" for i in range(joints+1)
+        f"joint{i+1}" for i in range(joints)
     ]
+    height = 0.05 + (joints * 0.2) + 0.05
 
     arm_stiffness = 1e3
     arm_damping = 1e2
