@@ -1,0 +1,390 @@
+<?xml version="1.0"?>
+<robot name="planar_10_dof_robot">
+    <!-- Materials -->
+    <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+    </material>
+    <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+    </material>
+    <material name="green">
+        <color rgba="0.0 0.8 0.0 1.0"/>
+    </material>
+    <material name="yellow">
+        <color rgba="0.8 0.8 0.0 1.0"/>
+    </material>
+    <material name="purple">
+        <color rgba="0.8 0.0 0.8 1.0"/>
+    </material>
+    <material name="cyan">
+        <color rgba="0.0 0.8 0.8 1.0"/>
+    </material>
+    <material name="orange">
+        <color rgba="1.0 0.5 0.0 1.0"/>
+    </material>
+    <material name="grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+    </material>
+
+    <!-- Base Link - flat on the floor -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.025"/>
+            </geometry>
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.025"/>
+            </geometry>
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="1.0"/>
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+            <inertia 
+                ixx="0.0008854166666666668" 
+                ixy="0" ixz="0" 
+                iyy="0.0008854166666666668" 
+                iyz="0" 
+                izz="0.001666666666666667"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 1: base_link to link1 (Revolute around Z-axis) -->
+    <joint name="joint1" type="revolute">
+        <parent link="base_link"/>
+        <child link="link1"/>
+        <origin xyz="0.05 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 1 - flat on the floor -->
+    <link name="link1">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="1.000"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000185" ixy="0" ixz="0" iyy="0.000885" iyz="0" izz="0.000967"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 2: link1 to link2 (Revolute around Z-axis) -->
+    <joint name="joint2" type="revolute">
+        <parent link="link1"/>
+        <child link="link2"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="100.0" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 2 - flat on the floor -->
+    <link name="link2">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.990"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000184" ixy="0" ixz="0" iyy="0.000877" iyz="0" izz="0.000957"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 3: link2 to link3 (Revolute around Z-axis) -->
+    <joint name="joint3" type="revolute">
+        <parent link="link2"/>
+        <child link="link3"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="66.66666666666667" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 3 - flat on the floor -->
+    <link name="link3">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="green"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.980"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000182" ixy="0" ixz="0" iyy="0.000868" iyz="0" izz="0.000947"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 4: link3 to link4 (Revolute around Z-axis) -->
+    <joint name="joint4" type="revolute">
+        <parent link="link3"/>
+        <child link="link4"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="50.0" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 4 - flat on the floor -->
+    <link name="link4">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="yellow"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.970"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000180" ixy="0" ixz="0" iyy="0.000859" iyz="0" izz="0.000938"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 5: link4 to link5 (Revolute around Z-axis) -->
+    <joint name="joint5" type="revolute">
+        <parent link="link4"/>
+        <child link="link5"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="40.0" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 5 - flat on the floor -->
+    <link name="link5">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="purple"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.960"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000178" ixy="0" ixz="0" iyy="0.000850" iyz="0" izz="0.000928"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 6: link5 to link6 (Revolute around Z-axis) -->
+    <joint name="joint6" type="revolute">
+        <parent link="link5"/>
+        <child link="link6"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="33.333333333333336" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 6 - flat on the floor -->
+    <link name="link6">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="cyan"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.950"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000176" ixy="0" ixz="0" iyy="0.000841" iyz="0" izz="0.000918"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 7: link6 to link7 (Revolute around Z-axis) -->
+    <joint name="joint7" type="revolute">
+        <parent link="link6"/>
+        <child link="link7"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="28.571428571428573" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 7 - flat on the floor -->
+    <link name="link7">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.940"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000174" ixy="0" ixz="0" iyy="0.000832" iyz="0" izz="0.000909"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 8: link7 to link8 (Revolute around Z-axis) -->
+    <joint name="joint8" type="revolute">
+        <parent link="link7"/>
+        <child link="link8"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="25.0" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 8 - flat on the floor -->
+    <link name="link8">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.930"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000172" ixy="0" ixz="0" iyy="0.000823" iyz="0" izz="0.000899"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 9: link8 to link9 (Revolute around Z-axis) -->
+    <joint name="joint9" type="revolute">
+        <parent link="link8"/>
+        <child link="link9"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="22.22222222222222" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 9 - flat on the floor -->
+    <link name="link9">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.920"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000171" ixy="0" ixz="0" iyy="0.000815" iyz="0" izz="0.000889"/>
+        </inertial>
+    </link>
+
+    <!-- Joint 10: link9 to link10 (Revolute around Z-axis) -->
+    <joint name="joint10" type="revolute">
+        <parent link="link9"/>
+        <child link="link10"/>
+        <origin xyz="0.1 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="20.0" velocity="1.0"/>
+    </joint>
+
+    <!-- Link 10 - flat on the floor -->
+    <link name="link10">
+        <visual>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.1 0.04000000000000001 0.025"/>
+            </geometry>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+        </collision>
+        <inertial>
+            <mass value="0.910"/>
+            <origin xyz="0.05 0 0.0125" rpy="0 0 0"/>
+            <inertia ixx="0.000169" ixy="0" ixz="0" iyy="0.000806" iyz="0" izz="0.000880"/>
+        </inertial>
+    </link>
+
+    <!-- End Effector -->
+    <joint name="joint11" type="fixed">
+        <parent link="link10"/>
+        <child link="end_effector"/>
+        <origin xyz="0.1 0 0.0125" rpy="0 0 0"/>
+    </joint>
+
+    <link name="end_effector">
+        <visual>
+            <geometry>
+                <cylinder radius="0.020000000000000004" length="0.025"/>
+            </geometry>
+            <material name="grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.020000000000000004" length="0.025"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.00001"/>
+        </inertial>
+    </link>
+</robot>
