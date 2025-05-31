@@ -62,6 +62,8 @@ class PlanarReachEnv(BaseEnv):
             max_dist = 0.6 * self.agent.height
             
             goal_xyz = torch.rand((b,3)) * (max_dist - min_dist) + min_dist
+            sign = torch.randint(0, 2, goal_xyz.shape, dtype=torch.float32) * 2 - 1 
+            goal_xyz *=sign
 
             goal_xyz[:,-1] = 0
             
