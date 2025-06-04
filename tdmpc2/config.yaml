@@ -1,5 +1,5 @@
 defaults:
-    - override hydra/launcher: submitit_local
+  - override hydra/launcher: submitit_local
 
 # environment
 env_id: PushCube-v1
@@ -31,8 +31,8 @@ enc_lr_scale: 0.3
 grad_clip_norm: 20
 tau: 0.01
 discount_denom: 5
-discount_min: 0.95
-discount_max: 0.995
+discount_min: 0.8
+discount_max: 0.8
 buffer_size: 1_000_000
 exp_name: default
 data_dir: ???
@@ -76,9 +76,9 @@ simnorm_dim: 8
 
 # logging
 wandb_project:
-wandb_group: 
+wandb_group:
 wandb_name:
-wandb_entity: 
+wandb_entity:
 wandb_silent: false
 wandb: false # enable wandb
 save_csv: true
@@ -105,22 +105,22 @@ true_latent_dim: ???
 
 # Added for Maniskill RL Baselines Config Convention (don't assign to them)
 env_cfg:
-    env_id: ???
-    control_mode: ??? # pd_joint_delta_pos or pd_ee_delta_pose
-    obs_mode: ???
-    reward_mode: ??? 
-    num_envs: ???
-    sim_backend: ??? # cpu or gpu
-    partial_reset: false
-    env_horizon: ???
+  env_id: ???
+  control_mode: ??? # pd_joint_delta_pos or pd_ee_delta_pose
+  obs_mode: ???
+  reward_mode: ???
+  num_envs: ???
+  sim_backend: ??? # cpu or gpu
+  partial_reset: false
+  env_horizon: ???
 eval_env_cfg:
-    env_id: ???
-    control_mode: ???
-    obs_mode: ???
-    reward_mode: ???
-    num_envs: ???
-    sim_backend: ???
-    env_horizon: ???
-    partial_reset: false
-    num_eval_episodes: ???
+  env_id: ???
+  control_mode: ???
+  obs_mode: ???
+  reward_mode: ???
+  num_envs: ???
+  sim_backend: ???
+  env_horizon: ???
+  partial_reset: false
+  num_eval_episodes: ???
 discount: ???
